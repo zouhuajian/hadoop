@@ -160,6 +160,7 @@ import org.apache.hadoop.fs.statistics.FileSystemStatisticNames;
 import org.apache.hadoop.fs.statistics.IOStatistics;
 import org.apache.hadoop.fs.statistics.IOStatisticsSource;
 import org.apache.hadoop.fs.statistics.IOStatisticsContext;
+import org.apache.hadoop.fs.statistics.StreamStatisticNames;
 import org.apache.hadoop.fs.statistics.impl.IOStatisticsStore;
 import org.apache.hadoop.fs.store.LogExactlyOnce;
 import org.apache.hadoop.fs.store.audit.AuditEntryPoint;
@@ -5586,6 +5587,10 @@ public class S3AFileSystem extends FileSystem implements StreamCapabilities,
     // is S3 Access Grants enabled
     case AWS_S3_ACCESS_GRANTS_ENABLED:
       return s3AccessGrantsEnabled;
+
+      // stream leak detection.
+    case StreamStatisticNames.STREAM_LEAKS:
+      return !prefetchEnabled;
 
     default:
       // is it a performance flag?
